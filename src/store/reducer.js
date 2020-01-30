@@ -1,35 +1,26 @@
-import { CHANGE_INPUT_VALUE, ADD_TODO_ITEM, DELETE_TOTO_ITEM, INIT_LIST_ACTION } from './actionTypes'
+import { CHANGE_INPUT_VALUE, CLICK_VALUE, DELETE_VALUE } from './actionTypes'
 
 const defaultState = {
     inputValue: '',
     list: []
 }
 
-// reduce 可以接收state,但不可以修改state
 export default (state = defaultState, action) => {
     if (action.type === CHANGE_INPUT_VALUE) {
         const newState = JSON.parse(JSON.stringify(state));
         newState.inputValue = action.value;
         return newState;
     }
-
-    if (action.type === ADD_TODO_ITEM) {
+    if (action.type === CLICK_VALUE) {
         const newState = JSON.parse(JSON.stringify(state));
         newState.list.push(newState.inputValue);
         newState.inputValue = '';
         return newState;
     }
-
-    if (action.type === DELETE_TOTO_ITEM) {
+    if (action.type === DELETE_VALUE) {
         const newState = JSON.parse(JSON.stringify(state));
-        newState.list.splice(action.index, 1);
+        newState.list.splice(action.index, 1);       
         return newState;
     }
-
-    if (action.type === INIT_LIST_ACTION) {
-        const newState = JSON.parse(JSON.stringify(state));
-        newState.list = action.data;
-        return newState;
-    }
-    return state;
+    return state
 }
