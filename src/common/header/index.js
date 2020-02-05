@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { 
     HeaderWrapper, 
@@ -10,67 +10,65 @@ import {
     Button,
     SearchWrapper
 } from './style';
+import { connect } from 'react-redux';
+import { inputFocus, inputBlur } from '../../store/actionCreators'
 
-class Header extends Component {
+//  无状态组件，性能优异
+const Header = (props) => {
+    return (
+        <HeaderWrapper>
+            <Logo />
+            <Nav>
+                <NavItem className='left active'>首页</NavItem>
+                <NavItem className='left'>下载App</NavItem>
+                <NavItem className='right'>登陆</NavItem>
+                <NavItem className='right'>
+                    <span className="iconfont">&#xe636;</span>
+                </NavItem>
+                <SearchWrapper>
+                    <CSSTransition
+                        in={props.focused}
+                        timeout={200}
+                        classNames="slide"
+                    >
+                        <NavSearch 
+                            className={props.focused ? 'focused' : ''}
+                            onFocus={props.handleInputFocused}
+                            onBlur={props.handleInputBlur}
+                        ></NavSearch>
+                    </CSSTransition>
+                    <span 
+                        className={props.focused ? 'focused iconfont' : 'iconfont'}
+                    >&#xe623;</span>
+                </SearchWrapper>
+            </Nav>
+            <Addition> 
+                <Button className='writting'>
+                    <span className="iconfont">&#xe615;</span>写文章
+                </Button>
+                <Button className='reg'>注册</Button>
+            </Addition>
+        </HeaderWrapper>
+    )
+}
 
-    constructor (props) {
-        super(props);
-        this.state = {
-            focused: false
-        }
-        this.handleInputFocused = this.handleInputFocused.bind(this);
-        this.handleInputBlur = this.handleInputBlur.bind(this);
-    }
-
-    render () {
-        return (
-            <HeaderWrapper>
-                <Logo />
-                <Nav>
-                    <NavItem className='left active'>首页</NavItem>
-                    <NavItem className='left'>下载App</NavItem>
-                    <NavItem className='right'>登陆</NavItem>
-                    <NavItem className='right'>
-                        <span className="iconfont">&#xe636;</span>
-                    </NavItem>
-                    <SearchWrapper>
-                        <CSSTransition
-                            in={this.state.focused}
-                            timeout={200}
-                            classNames="slide"
-                        >
-                            <NavSearch 
-                                className={this.state.focused ? 'focused' : ''}
-                                onFocus={this.handleInputFocused}
-                                onBlur={this.handleInputBlur}
-                            ></NavSearch>
-                        </CSSTransition>
-                        <span 
-                            className={this.state.focused ? 'focused iconfont' : 'iconfont'}
-                        >&#xe623;</span>
-                    </SearchWrapper>
-                </Nav>
-                <Addition> 
-                    <Button className='writting'>
-                        <span className="iconfont">&#xe615;</span>写文章
-                    </Button>
-                    <Button className='reg'>注册</Button>
-                </Addition>
-            </HeaderWrapper>
-        )
-    }
-
-    handleInputFocused () {
-        this.setState({
-            focused: true
-        })
-    }
-
-    handleInputBlur () {
-        this.setState({
-            focused: false
-        })
+const mapStateToProps = (state) => {
+    return {
+        focused: state.header.focused
     }
 }
 
-export default Header;
+const mapDispathToProps = (dispatch) => {
+    return {
+        handleInputFocused () {
+            const action = inputFocus();
+            dispatch(action);
+        },
+        handleInputBlur () {
+            const action = inputBlur();
+            dispatch(action);
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispathToProps)(Header);
