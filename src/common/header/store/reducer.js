@@ -1,19 +1,18 @@
-import { SEARCH_FOCUS, SEARCH_BLUR } from '../../../store/actionTypes';
+import * as actionTypes from './actionTypes';
+import { fromJS } from 'immutable';
 
-const defaultState = {
+const defaultState = fromJS({
     focused: false,
-};
+});
 
 export default (state = defaultState, action) => {
-    if (action.type === SEARCH_FOCUS) {
-        const newState = JSON.parse(JSON.stringify(state));
-        newState.focused = true;
-        return newState;
+    if (action.type === actionTypes.SEARCH_FOCUS) {
+        // immutable对象的set方法，会结合之前的Immutable对象的值
+        // 和设置的值，返回一个全新的对象
+        return state.set('focused', true);
     }
-    if (action.type === SEARCH_BLUR) {
-        const newState = JSON.parse(JSON.stringify(state));
-        newState.focused = false;
-        return newState;
+    if (action.type === actionTypes.SEARCH_BLUR) {
+        return state.set('focused', false);
     }
     return state;
 }
