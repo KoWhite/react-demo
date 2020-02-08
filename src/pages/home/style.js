@@ -14,11 +14,12 @@ export const HomeLeft = styled.div`
     .banner-img {
         width: 625px;
         height: 270px;
+        border-radius: 5px;
     }
 `;
 
 export const HomeRight = styled.div`
-    width: 240px;
+    width: 280px;
     float: right;
 `;
 
@@ -78,5 +79,59 @@ export const ListInfo = styled.div`
         line-height: 24px;
         font-size: 13px;
         color: #999;
+    }
+`;
+
+// Recommend
+export const RecommendWrapper = styled.div`
+    margin: 30px 0;
+    width: 280px;
+`;
+
+export const RecommendItem = styled.div`
+    width: 280px;
+    height: 50px;
+    margin-top: -4px;
+    background: url(${(props) => props.imgUrl});
+    background-size: contain;
+    margin-bottom: 11px;
+`;
+
+// Writer
+export const WriterWrapper = styled.div`
+    width: 278px;
+    border-radius: 3px;
+    height: 300px;
+    line-height: 25px;
+`;
+
+export const WriterItem = styled.div`
+    width: 278px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 10px;
+    .pic {
+        border-radius: 50%;
+        float: left;
+        width: 45px;
+        height: 45px;
+        margin-right: 10px
+    }
+    .author {  
+        color: #ccc;
+        font-size: 14px;
+    }
+    p {
+        display: inline;
+        color: #969696;
+        font-size: 12px;
+    }
+    .follow {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        color: #42c02e;
+        text-decoration: none;
+        float: right;
     }
 `;
