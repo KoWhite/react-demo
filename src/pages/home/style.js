@@ -23,6 +23,20 @@ export const HomeRight = styled.div`
     float: right;
 `;
 
+export const BackTop = styled.div`
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    color: #ccc;
+    right: 100px;
+    bottom: 100px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    cursor: pointer;
+`;
+
 // Topic
 export const TopicWrapper = styled.div`
     overflow: hidden;
@@ -80,6 +94,18 @@ export const ListInfo = styled.div`
         font-size: 13px;
         color: #999;
     }
+`;
+
+export const LoadMore = styled.div`
+    width: 100%;
+    height:40px;
+    line-height: 40px;
+    background: #a5a5a5;
+    text-align: center;
+    border-radius: 20px;
+    color: #fff;
+    margin: 30px 0;
+    cursor: pointer;
 `;
 
 // Recommend
