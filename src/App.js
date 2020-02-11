@@ -15,11 +15,11 @@ class App extends Component {
                 <div>
                     <GlobalStyled />
                     <IconStyled />
-                    <Header />
                     <BrowserRouter>
                         <div>
+                            <Header />
                             <Route path='/' exact component={Home}></Route>
-                            <Route path='/detail' exact component={Detail}></Route>
+                            <Route path='/detail/:id' exact component={Detail}></Route>
                         </div> 
                     </BrowserRouter>
                 </div>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { actionCreators } from './store';
 import { 
@@ -17,14 +17,17 @@ import {
     SearchInfoList
 } from './style';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 //  无状态组件，性能优异
-class Header extends Component {
+class Header extends PureComponent {
     render () {
         const { focused, list, handleInputFocused, handleInputBlur } = this.props;
         return (
             <HeaderWrapper>
-                <Logo />
+                <Link to="/"> 
+                    <Logo />
+                </Link>
                 <Nav>
                     <NavItem className='left active'>首页</NavItem>
                     <NavItem className='left'>下载App</NavItem>
